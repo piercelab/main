@@ -65,7 +65,7 @@ foreach my $chain (@unique_chain_id) {
     }
     
     my $outanarci = "anarcci.out";
-    system('/Users/ragul/Downloads/Re__anarci/anarci-1.0.BP/bin/ANARCI', '-o', $outanarci, '-i', $seq, '-r', 'tr', '-s', 'a');
+    system('ANARCI', '-o', $outanarci, '-i', $seq, '-r', 'tr', '-s', 'a');
     if ( $? == -1 ) {
 	print "ANARCI command failed: $!\n";
 	exit;	
@@ -83,8 +83,8 @@ foreach my $chain (@unique_chain_id) {
 	push (@numarray, \@chunks);
     }
     
-    print "SEQ : $seq\n";
-    print "nSEQ : $newseq\n";
+    #print "SEQ : $seq\n";
+    #print "nSEQ : $newseq\n";
     if ($newseq eq "") {
 	if ( ($chain eq "D") || ($chain eq "E") ) { 
 	    print "Chain $chain : No TCR domain detected\n";
