@@ -83,10 +83,12 @@ foreach my $chain (@unique_chain_id) {
 	push (@numarray, \@chunks);
     }
     
-    #print "SEQ : $seq\n";
-    #print "nSEQ : $newseq\n";
+
+
     if ($newseq eq "") {
 	if ( ($chain eq "D") || ($chain eq "E") ) { 
+	    print "SEQ : $seq\n";
+	    print "nSEQ : $newseq\n";
 	    print "Chain $chain : No TCR domain detected\n";
 	}
 	foreach my $line (@pdb_lines) {
@@ -95,7 +97,7 @@ foreach my $chain (@unique_chain_id) {
 	    }
 	}
     } else {
-#	print "Chain $chain : TCR domain detected\n";
+	#print "Chain $chain : TCR domain detected\n";
 	unless (length($seq) == length($newseq))
 	{
 	    my $regex_seqmatch = "([$amino+])$newseq([$amino+])";
@@ -136,8 +138,9 @@ foreach my $chain (@unique_chain_id) {
 		    my $resid = substr($line, 22, 5);
 		    if ( ($seq eq $numarray[$i][2]) && ($resid == $resmap[$i][1]) ) {
 			my $tmpline = $line;
-			my $formated_res_num = sprintf("%4s", $numarray[$i][1]);
-			$tmpline =~ s/$resmap[$i][1]/$formated_res_num/g;
+			my $formated_res_num = sprintf("%4s ", $numarray[$i][1]);#residue insertion code substituted with space
+			#$tmpline =~ s/$resmap[$i][1]/$formated_res_num/g;
+			substr($tmpline, 22, 5) = $formated_res_num;
 			print TCRAHOPDB "$tmpline";
 		    }
 		}

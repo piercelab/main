@@ -18,7 +18,7 @@ hmmscan_program = '/TCRmodeller/programs/hmmer/hmmscan'
 script, filename = argv
 
 tag = "a"
-chainid = "A"
+chainid = "D"
 f1 = open('temp1.fa','w')            
 pdbfile = parser.get_structure("PDB", filename)
 mychain = pdbfile[0][chainid]
@@ -30,7 +30,7 @@ f1.close()
 aa = find_CDRs('temp1.fa', hmmscan_program, tmpdir, tag)
 
 tag = "b"
-chainid = "B"
+chainid = "E"
 f2 = open('temp2.fa','w')            
 pdbfile = parser.get_structure("PDB", filename)
 mychain = pdbfile[0][chainid]
@@ -41,7 +41,7 @@ f2.write("\n")
 f2.close()
 bb = find_CDRs('temp2.fa', hmmscan_program, tmpdir, tag)
 
-print filename, aa[2], aa[3]
+print filename, aa, aa
 
-#pose = pose_from_pdb(filename)
-#print filename, pose.pdb_info().pdb2pose('A',aa[4]), pose.pdb_info().pdb2pose('A',aa[5]), pose.pdb_info().pdb2pose('B',bb[4]), pose.pdb_info().pdb2pose('B',bb[5])
+pose = pose_from_pdb(filename)
+print filename, pose.pdb_info().pdb2pose('D',aa[4]), pose.pdb_info().pdb2pose('D',aa[5]), pose.pdb_info().pdb2pose('E',bb[4]), pose.pdb_info().pdb2pose('E',bb[5])
